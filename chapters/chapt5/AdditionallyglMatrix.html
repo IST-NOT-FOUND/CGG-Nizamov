@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+      <title>Дополнительно о матрицах в WebGL</title>
+      <meta charset="utf-8">
+      <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    </head>
+    <body>
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Главная</a></li>
+          <li class="breadcrumb-item active">Дополнительно о матрицах в WebGL</li>
+          <li class="breadcrumb-item"><a href="StainingCube.html">Окрашивание куба</a></li>
+      </ol>
+      <canvas id="canvas3D" width="400" height="300">Ваш браузер не поддерживает элемент canvas</canvas>
+  <!-- фрагментный шейдер -->
+  <script id="shader-fs" type="x-shader/x-fragment">
+    void main(void) {
+      gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0);
+    }
+  </script>
+  <!-- вершинный шейдер -->
+  <script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+     uniform mat4 uMVMatrix;
+     uniform mat4 uPMatrix;
+    void main(void) {
+       gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+    }
+  </script>
+<script src="../../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+    <script  src="../../js/gl-matrix.js"></script>
+  <script src="../../js/Fifth Chapter/AdditionallyglMATRIX.js"></script>
+    </body>
+</html>
