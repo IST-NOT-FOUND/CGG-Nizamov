@@ -11,10 +11,12 @@
           <li class="breadcrumb-item"><a href="../../index.html">Главная</a></li>
           <li class="breadcrumb-item active">Индивидуальное задание для 4ой главы (конец главы)</li>
       </ol>
+      <div class="container">
       <a onclick="change_color()" id="btn_change_color" class="btn btn-success">Изменить цвет вершин</a>
       <p></p>
       <canvas id="canvas3D" width="400" height="300">Ваш браузер не поддерживает элемент canvas</canvas>
 <!-- фрагментный шейдер -->
+</div>
 <script id="shader-fs" type="x-shader/x-fragment">
 varying highp vec4 vColor;
   void main(void) {
