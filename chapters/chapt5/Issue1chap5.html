@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Индивидуальное задание</title>
+        <meta charset="utf-8">
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/bootstrap-slider.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/mystyle.css" rel="stylesheet" type="text/css"/>
+    </head>
+  <body>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Главная</a></li>
+        <li class="breadcrumb-item active">Индивидуальное задание</li>
+    </ol>
+    <div class="container">
+                <p>
+                    <b class="colors"></b> <input type="text" class="span2" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="0" value="0" onchange="initSlider()" data-slider-id="GC" id="G" data-slider-tooltip="hide" data-slider-handle="round" />
+                    <span id="colorCurrentSliderValLabel">Изменить цвет</span>
+                </p>
+            <canvas id="canvas3D">Ваш браузер не поддерживает элемент canvas</canvas>
+            </div>
+            <script id="shader-fs" type="x-shader/x-fragment">
+			varying highp vec4 vColor;
+			  void main(void) {
+				gl_FragColor = vColor;
+			  }
+		</script>
+		<script id="shader-vs" type="x-shader/x-vertex">
+			attribute vec3 aVertexPosition;
+            attribute vec3 aVertexColor;
+            varying highp vec4 vColor;
+            uniform mat4 uMVMatrix;
+            uniform mat4 uPMatrix;
+              void main(void) {
+                 gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
+                  vColor = vec4(aVertexColor, 1.0);
+              }
+		</script>
+<script src="../../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+          <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+          <script src="../../js/three.min.js" type="text/javascript"></script>
+          <script src="../../js/gl-matrix.js" type="text/javascript"></script>
+          <script src="../../js/canvas_style.js" type="text/javascript"></script>
+          <script src="../../js/bootstrap-slider.js" type="text/javascript"></script>
+          <script  type="text/javascript" src="../../js/Fifth Chapter/slider.js"></script>
+          <script  type="text/javascript" src="../../js/Fifth Chapter/Issue1chap5.js"></script>
+</body>
+</html>
