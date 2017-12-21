@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Работа с координатами текстуры</title>
+        <meta charset="utf-8">
+        <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+  <body>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html">Главная</a></li>
+        <li class="breadcrumb-item active">Работа с координатами текстуры</li>
+        <li class="breadcrumb-item"><a href="Texturing3D.html">Текстурирование 3D-объектов</a></li>
+    </ol>
+    <div class="container">
+      <canvas id="canvas3D" width="400" height="300">Ваш браузер не поддерживает элемент canvas</canvas>
+</div>
+<script id="shader-fs" type="x-shader/x-fragment">
+            precision highp float;
+            uniform sampler2D uSampler;
+            varying vec2 vTextureCoords;
+            void main(void) {
+                gl_FragColor = texture2D(uSampler, vTextureCoords);
+            }
+        </script>
+
+        <script id="shader-vs" type="x-shader/x-vertex">
+            attribute vec3 aVertexPosition;
+            attribute vec2 aVertexTextureCoords;
+            varying vec2 vTextureCoords;
+            void main(void) {
+                gl_Position = vec4(aVertexPosition, 1.0);
+                vTextureCoords = aVertexTextureCoords;
+            }
+        </script>
+        <script src="../../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+            <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+            <script src="../../js/three.min.js" type="text/javascript"></script>
+            <script  src="../../js/gl-matrix.js"></script>
+              <script src="../../js/Seventh Chapter/TextureCoordinates.js"></script>
+    </body>
+</html>
