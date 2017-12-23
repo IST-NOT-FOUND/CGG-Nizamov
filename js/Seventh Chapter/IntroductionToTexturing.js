@@ -72,7 +72,7 @@ function setTextures(){
         setupWebGL();
         draw();
     };
-    image.src = "../../src/images/texture/stone.jpg";
+    image.src = "../../src/images/texture/stone.png";
     shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     gl.uniform1i(shaderProgram.samplerUniform, 0);
 }
