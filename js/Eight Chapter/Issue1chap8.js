@@ -6,8 +6,11 @@ var textureCoordsBuffer;
 var vertexNormalBuffer;
 var texture;
 var yAngle = 2.0;
+var angle = 0.0;
 var zTranslation = -2.0;
 var xAngle = 0.1;
+var k = 0.05;
+var isAnimated = false;
 var mvMatrix = mat4.create();
 var pMatrix = mat4.create();
 var nMatrix = mat3.create();
@@ -20,7 +23,7 @@ function initShaders() {
     gl.attachShader(shaderProgram, fragmentShader);
     gl.linkProgram(shaderProgram);
     if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-        alert("Failed to install shaders");
+        alert("Не удалось установить шейдеры");
     }
     gl.useProgram(shaderProgram);
     shaderProgram.vertexPositionAttribute = gl.getAttribLocation(shaderProgram, "aVertexPosition");
@@ -37,7 +40,6 @@ function initShaders() {
     shaderProgram.uniformDiffuseLightColor = gl.getUniformLocation(shaderProgram, "uDiffuseLightColor");
     shaderProgram.uniformSpecularLightColor = gl.getUniformLocation(shaderProgram, "uSpecularLightColor");
 }
-
 function setupLights() {
     gl.uniform3fv(shaderProgram.uniformLightPosition, [0.0, 10.0, 5.0]);
     gl.uniform3fv(shaderProgram.uniformAmbientLightColor, [0.1, 0.1, 0.1]);
@@ -57,7 +59,7 @@ function getShader(type,id) {
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        alert("Shader compilation error: " + gl.getShaderInfoLog(shader));
+        alert("Ошибка компиляции шейдера: " + gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
         return null;
     }
@@ -91,7 +93,9 @@ function initBuffers() {
         8, 9, 10,
         10, 11, 8,
         12, 13, 14,
-        14, 15, 12
+        14, 15, 12,
+        0,3,4,
+        3,4,7
     ];
     vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
@@ -152,12 +156,12 @@ function draw() {
 function setupWebGL() {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT || gl.DEPTH_BUFFER_BIT);
+    angle += 0.01;
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     mat4.perspective(pMatrix, 1.04, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0);
     mat4.identity(mvMatrix);
     mat4.translate(mvMatrix,mvMatrix,[0, 0, zTranslation]);
-    mat4.rotateX(mvMatrix,mvMatrix, xAngle);
-    mat4.rotateY(mvMatrix,mvMatrix, yAngle);
+    mat4.rotate(mvMatrix,mvMatrix, angle, [1, 1, 1]);
     mat3.normalFromMat4(nMatrix, mvMatrix);
 }
 
@@ -188,9 +192,8 @@ window.onload = function(){
         gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     } catch(e) {}
     if (!gl) {
-        alert("Your browser doesn't support WebGL");
+        alert("Ваш браузер не поддерживает WebGL");
     } if(gl){
-        document.addEventListener('keydown', handleKeyDown, false);
         gl.viewportWidth = canvas.width;
         gl.viewportHeight = canvas.height;
         initShaders();
@@ -205,29 +208,6 @@ window.onload = function(){
         })();
     }
 };
-
-function handleKeyDown(e){
-    switch(e.keyCode) {
-        case 39:
-            yAngle += 0.1;
-            break;
-        case 37:
-            yAngle -= 0.1;
-            break;
-        case 40:
-            xAngle += 0.1;
-            break;
-        case 38:
-            xAngle -= 0.1;
-            break;
-        case 83:
-            zTranslation += 0.1;
-            break;
-        case 87:
-            zTranslation -= 0.1;
-            break;
-    }
-}
 
 window.requestAnimFrame = (function(){
     return  window.requestAnimationFrame   ||
