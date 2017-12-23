@@ -64,92 +64,24 @@ function getShader(type,id) {
     return shader;
 }
 
-function initWallBuffers() {
-    var vertices = [
-        -0.8, -0.5, 0.5,
-        -0.8, 0.5, 0.5,
-        -0.4, 0.5, 0.5,
-        -0.4, -0.5, 0.5,
-        -0.8, -0.5, 0.0,
-        -0.8, 0.5, 0.0,
-        -0.4, 0.5, 0.0,
-        -0.4, -0.5, 0.0,
-        -0.8, -0.5, 0.5,
-        -0.8, 0.5, 0.5,
-        -0.8, 0.5, 0.0,
-        -0.8, -0.5, 0.0,
-        -0.4, -0.5, 0.5,
-        -0.4, 0.5, 0.5,
-        -0.4, 0.5, 0.0,
-        -0.4, -0.5, 0.0,
-
-        -0.4, -0.5, 0.5,
-        -0.4, 0.5, 0.5,
-        0, 0.5, 0.5,
-        0, -0.5, 0.5,
-        -0.4, -0.5, 0.0,
-        -0.4, 0.5, 0.0,
-        0, 0.5, 0.0,
-        0, -0.5, 0.0,
-        -0.4, -0.5, 0.5,
-        -0.4, 0.5, 0.5,
-        -0.4, 0.5, 0.0,
-        -0.4, -0.5, 0.0,
-        0, -0.5, 0.5,
-        0, 0.5, 0.5,
-        0, 0.5, 0.0,
-        0, -0.5, 0.0,
-
-        0, -0.5, 0.5,
-        0, -0.25, 0.5,
-        0.4, -0.25, 0.5,
-        0.4, -0.5, 0.5,
-        0, -0.5, 0.0,
-        0, -0.25, 0.0,
-        0.4, -0.25, 0.0,
-        0.4, -0.5, 0.0,
-        0, -0.5, 0.5,
-        0, -0.25, 0.5,
-        0, -0.25, 0.0,
-        0, -0.5, 0.0,
-        0.4, -0.5, 0.5,
-        0.4, -0.25, 0.5,
-        0.4, -0.25, 0.0,
-        0.4, -0.5, 0.0,
-
-        0, 0.25, 0.5,
-        0, 0.5, 0.5,
-        0.4, 0.5, 0.5,
-        0.4, 0.25, 0.5,
-        0, 0.25, 0.0,
-        0, 0.5, 0.0,
-        0.4, 0.5, 0.0,
-        0.4, 0.25, 0.0,
-        0, 0.25, 0.5,
-        0, 0.5, 0.5,
-        0, 0.5, 0.0,
-        0, 0.25, 0.0,
-        0.4, 0.25, 0.5,
-        0.4, 0.5, 0.5,
-        0.4, 0.5, 0.0,
-        0.4, 0.25, 0.0,
-
-        0.4, -0.5, 0.5,
-        0.4, 0.5, 0.5,
-        0.8, 0.5, 0.5,
-        0.8, -0.5, 0.5,
-        0.4, -0.5, 0.0,
-        0.4, 0.5, 0.0,
-        0.8, 0.5, 0.0,
-        0.8, -0.5, 0.0,
-        0.4, -0.5, 0.5,
-        0.4, 0.5, 0.5,
-        0.4, 0.5, 0.0,
-        0.4, -0.5, 0.0,
-        0.8, -0.5, 0.5,
-        0.8, 0.5, 0.5,
-        0.8, 0.5, 0.0,
-        0.8, -0.5, 0.0
+function initBuffers() {
+    var vertices =[
+        -0.5, -0.5, 0.5,
+        0, 0.5, 0,
+        0, 0.5, 0,
+        0.5, -0.5, 0.5,
+        -0.5, -0.5, -0.5,
+        0, 0.5, 0,
+        0, 0.5, 0,
+        0.5, -0.5, -0.5,
+        -0.5, -0.5, 0.5,
+        0, 0.5, 0,
+        0, 0.5, 0,
+        -0.5, -0.5, -0.5,
+        0.5, -0.5, 0.5,
+        0, 0.5, 0,
+        0, 0.5, 0,
+        0.5, -0.5, -0.5
     ];
     var indices = [
         0, 1, 2,
@@ -159,153 +91,62 @@ function initWallBuffers() {
         8, 9, 10,
         10, 11, 8,
         12, 13, 14,
-        14, 15, 12,
-        16, 17, 18,
-        18, 19, 16,
-        20, 21, 22,
-        22, 23, 20,
-        24, 25, 26,
-        26, 27, 24,
-        28, 29, 30,
-        30, 31, 28,
-        32, 33, 34,
-        34, 35, 32,
-        36, 37, 38,
-        38, 39, 36,
-        40, 41, 42,
-        42, 43, 40,
-        44, 45, 46,
-        46, 47, 44,
-        48, 49, 50,
-        50, 51, 48,
-        52, 53, 54,
-        54, 55, 52,
-        56, 57, 58,
-        58, 59, 56,
-        60, 61, 62,
-        62, 63, 60,
-
-        64,65,66,
-        66,67,64,
-        68,69,70,
-        70,71,68,
-        72,73,74,
-        74,75,72,
-        76,77,78,
-        78,79,76
-
+        14, 15, 12
     ];
-    wallVertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexBuffer);
+    vertexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    wallVertexBuffer.itemSize = 3;
-    wallIndexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, wallIndexBuffer);
+    vertexBuffer.itemSize = 3;
+    indexBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-    wallIndexBuffer.numberOfItems = indices.length;
+    indexBuffer.numberOfItems = indices.length;
     var textureCoords = [];
-    for (var i=0; i<64; i++) {
+    for (var i=0; i<4; i++) {
         textureCoords.push(0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0);
     }
-    wallTextureCoordsBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, wallTextureCoordsBuffer);
+    textureCoordsBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordsBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
-    wallTextureCoordsBuffer.itemSize=2;
-}
-
-function initRoofBuffers() {
-    var vertices = [
-        -1.0, 0.5, 0.5,
-
-        -1.0, 0.8, 0.25,
-
-        1.0, 0.8, 0.25,
-
-        1.0, 0.5, 0.5,
-
-        -1.0, 0.5, 0.0,
-
-        -1.0, 0.8, 0.25,
-
-        1.0, 0.8, 0.25,
-
-        1.0, 0.5, 0.0,
-
-        -1.0, 0.5, 0.5,
-        -1.0, 0.8, 0.25,
-        -1.0, 0.8, 0.25,
-        -1.0, 0.5, 0.0,
-        1.0, 0.5, 0.5,
-        1.0, 0.8, 0.25,
-        1.0, 0.8, 0.25,
-        1.0, 0.5, 0.0,
-        -1.0, 0.5, 0.5,
-        -1.0, 0.5, 0.0,
-        1.0, 0.5, 0.0,
-        1.0, 0.5, 0.5,
-        -1.0, 0.8, 0.25,
-        -1.0, 0.8, 0.25,
-        1.0, 0.8, 0.25,
-      1.0, 0.8, 0.25,
-        0,0,0.5
+    textureCoordsBuffer.itemSize=2;
+    var normals = [
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0,  1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        0.0,  0.0, -1.0,
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+        -1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0,
+        1.0,  0.0,  0.0
     ];
-    var indices = [
-        0, 1, 2,
-        2, 3, 0,
-        4, 5, 6,
-        6, 7, 4,
-        8, 9, 10,
-        10, 11, 8,
-        12, 13, 14,
-        14, 15, 12,
-        16, 17, 18,
-        18, 19, 16,
-        20, 21, 22,
-        22, 23, 20
-    ];
-    roofVertexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, roofVertexBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
-    roofVertexBuffer.itemSize = 3;
-    roofIndexBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, roofIndexBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
-    roofIndexBuffer.numberOfItems = indices.length;
-    var textureCoords = [];
-    for (var i=0; i<6; i++) {
-        textureCoords.push(0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0);
-    }
-    roofTextureCoordsBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, roofTextureCoordsBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoords), gl.STATIC_DRAW);
-    roofTextureCoordsBuffer.itemSize=2;
+    vertexNormalBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexNormalBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
+    vertexNormalBuffer.itemSize = 3;
 }
 
-function wallDraw() {
-
-    gl.bindBuffer(gl.ARRAY_BUFFER, wallVertexBuffer);
+function draw() {
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
-        wallVertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ARRAY_BUFFER, wallTextureCoordsBuffer);
+        vertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertexNormalBuffer);
+    gl.vertexAttribPointer(shaderProgram.vertexNormalAttribute,
+        vertexNormalBuffer.itemSize, gl.FLOAT, false, 0, 0);
+    gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordsBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexTextureAttribute,
-        wallTextureCoordsBuffer.itemSize, gl.FLOAT, false, 0, 0);
+        textureCoordsBuffer.itemSize, gl.FLOAT, false, 0, 0);
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, wallTexture);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.enable(gl.DEPTH_TEST);
-    gl.drawElements(gl.TRIANGLES, wallIndexBuffer.numberOfItems, gl.UNSIGNED_SHORT,0);
-}
-
-function roofDraw() {
-    gl.bindBuffer(gl.ARRAY_BUFFER, roofVertexBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute,
-        roofVertexBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    gl.bindBuffer(gl.ARRAY_BUFFER, roofTextureCoordsBuffer);
-    gl.vertexAttribPointer(shaderProgram.vertexTextureAttribute,
-        roofTextureCoordsBuffer.itemSize, gl.FLOAT, false, 0, 0);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, roofTexture);
-    gl.enable(gl.DEPTH_TEST);
-    gl.drawElements(gl.TRIANGLES, roofIndexBuffer.numberOfItems, gl.UNSIGNED_SHORT,0);
+    gl.drawElements(gl.TRIANGLES, indexBuffer.numberOfItems, gl.UNSIGNED_SHORT,0);
 }
 
 function setupWebGL() {
@@ -319,20 +160,15 @@ function setupWebGL() {
     mat4.rotateY(mvMatrix,mvMatrix, yAngle);
     mat3.normalFromMat4(nMatrix, mvMatrix);
 }
-function setupTextures() {
-    wallTexture = gl.createTexture();
-    setTexture("../../src/images/texture/wood.jpg", wallTexture);
-    roofTexture = gl.createTexture();
-    setTexture("../../src/images/texture/red.png", roofTexture);
-}
-function setTexture(url, texture){
+
+function setTextures(){
     texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
     var image = new Image();
     image.onload = function() {
         handleTextureLoaded(image, texture);
     };
-    image.src = url;
+    image.src = "../../src/images/texture/brick.jpg";
     shaderProgram.samplerUniform = gl.getUniformLocation(shaderProgram, "uSampler");
     gl.uniform1i(shaderProgram.samplerUniform, 0);
 }
@@ -358,15 +194,13 @@ window.onload = function(){
         gl.viewportWidth = canvas.width;
         gl.viewportHeight = canvas.height;
         initShaders();
-        initRoofBuffers();
-        initWallBuffers();
-        setupTextures();
+        initBuffers();
+        setTextures();
         setupLights();
         (function animloop(){
             setupWebGL();
             setMatrixUniforms();
-            wallDraw();
-            roofDraw();
+            draw();
             requestAnimFrame(animloop, canvas);
         })();
     }
